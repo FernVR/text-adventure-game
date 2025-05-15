@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Main Menu</title>
-</head>
+{% block title %}Main Menu{% endblock %}
 
-<body>
+{% block content %}
     <h1>Welcome to the Adventure Game</h1>
     <p>
         You are about to enter a mysterious and dangerous world full of choices.<br>
@@ -15,6 +11,4 @@
     <form action="/start" method="POST">
         <button type="submit">Start Game</button>
     </form>
-</body>
-
-</html>
+{% endblock %}
