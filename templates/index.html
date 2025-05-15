@@ -12,6 +12,9 @@
         <input type="text" name="choice" placeholder="What do you do?" required>
         <button type="submit">Submit</button>
     </form>
+    <form action="{{ url_for('quit') }}">
+        <button type="submit">Quit Game</button>
+    </form>
 </body>
 
 </html>
