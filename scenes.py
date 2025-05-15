@@ -1,6 +1,6 @@
 scenes = {
     "start": {
-        "text": "You find yourself at the entrance to a dark cave. Do you ENTER or RUN?",
+        "text": "Welcome, {player}. You find yourself at the entrance to a dark cave. Do you ENTER or RUN?",
         "next": {
             "enter": "cave",
             "run": "escape"

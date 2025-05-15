@@ -8,7 +8,10 @@
         You are about to enter a mysterious and dangerous world full of choices.<br>
         Type your commands to interact with the world. Choose wisely!
     </p>
+    <br>
+    <p>Enter your name to begin:</p>
     <form action="/start" method="POST">
+        <input type="text" name="player_name" placeholder="Your name" required>
         <button type="submit">Start Game</button>
     </form>
 {% endblock %}
