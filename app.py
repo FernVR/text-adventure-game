@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, url_for
+from scenes import scenes
 
 app = Flask(__name__)
 app.secret_key = 'secretkey'
@@ -16,25 +17,22 @@ def start():
 
 @app.route("/game", methods=["GET", "POST"])
 def game():
-    message = ""
 
-    if session.get('progress') == 'start':
-        message = "You are at the cave entrance. What do you do?"
-
+    current_scene = session.get('progress', 'start')
+    scene = scenes.get(current_scene, {"text": "Scene not found.", "next": {}})
+    message = scene["text"]
 
     if request.method == "POST":
-        choice = request.form.get("choice").lower()
+        choice = request.form.get("choice", "").lower()
 
-        if "enter" in choice:
-            message = "You step into the cave and hear eerie sounds..."
-            session['progress'] = 'cave'
-        elif "run" in choice:
-            message = "You run away safely. The adventure ends here!"
-            session['progress'] = 'ran'
-        elif "quit" in choice:
-            return redirect(url_for('quit'))
+        next_scene = scene["next"].get(choice)
+        if next_scene:
+            session['progress'] = next_scene
+            return redirect(url_for("game"))
+        elif choice == "quit":
+            return redirect(url_for("quit"))
         else:
-            message = "I don't understand that choice. Try something else."
+            message = "Invalid choice. Try again."
     
     return render_template("index.html", message=message)
 
